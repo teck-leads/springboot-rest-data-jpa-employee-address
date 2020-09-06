@@ -2,6 +2,7 @@ package com.techleads.app.runner;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -29,23 +30,39 @@ public class EmpAddrsRunner implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Employee employee=new Employee();
+		Employee emp1=new Employee();
 		LocalDate date = LocalDate.of(1995, 9, 25);
-		employee.setName("madhav");
-		employee.setDateOfBirth(date);
+		emp1.setName("madhav");
+		emp1.setDateOfBirth(date);
+		
+		Employee emp2=new Employee();
+		 date = LocalDate.of(1995, 10, 12);
+		 emp2.setName("teja");
+		 emp2.setDateOfBirth(date);
+		 emp2.setAddress(Arrays.asList(new Address("Elite Hills", "Road No 10", "Hyderabad", "Home")));
+		 employeeService.saveEmployee(emp2);
+		 
+		Address homeAddrs=new Address();
+		homeAddrs.setAddrLineOne("VV Nagar");
+		homeAddrs.setAddrLineTwo("Road No 10");
+		homeAddrs.setCity("Hyderabad");
+		homeAddrs.setAddressType("HOME");
+		
+		Address officeAddrs=new Address();
+		officeAddrs.setAddrLineOne("DLF");
+		officeAddrs.setAddrLineTwo("Synergy Park ODC 6");
+		officeAddrs.setCity("Hyderabad");
+		officeAddrs.setAddressType("Office");
 		
 		
-		Address addrs=new Address();
-		addrs.setAddrLineOne("VV Nagar");
-		addrs.setAddrLineTwo("Road No 10");
-		addrs.setCity("Hyderabad");
 		
 		List<Address> addrsList=new ArrayList<>();
-		addrsList.add(addrs);
+		addrsList.add(homeAddrs);
+		addrsList.add(officeAddrs);
 		
-		employee.setAddress(addrsList);
+		emp1.setAddress(addrsList);
 		
-		Employee saveEmployee = employeeService.saveEmployee(employee);
+		Employee saveEmployee = employeeService.saveEmployee(emp1);
 		logger.info("Employee {saved}=> "+saveEmployee);
 		
 		List<Employee> findAllEmps = employeeService.findAllEmps();

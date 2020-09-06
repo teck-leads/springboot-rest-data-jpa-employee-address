@@ -6,6 +6,8 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.techleads.app.model.Employee;
@@ -23,7 +25,9 @@ public class EmployeeService {
 	}
 	
 	public List<Employee> findAllEmps(){
-		List<Employee> findAll = employeeRepository.findAll();
+		
+		Sort sortByName = Sort.by(Sort.Direction.DESC, "name");
+		List<Employee> findAll = employeeRepository.findAll(sortByName);
 		return findAll;
 	}
 	

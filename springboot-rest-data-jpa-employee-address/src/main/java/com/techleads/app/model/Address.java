@@ -37,7 +37,16 @@ public class Address implements Serializable {
 	private String addrLineOne;
 	private String addrLineTwo;
 	private String city;
+	private String addressType;
 	@ManyToMany(mappedBy = "address",cascade=CascadeType.ALL)
 	private List<Employee> employee=new ArrayList<>();
+	public Address(String addrLineOne, String addrLineTwo, String city, String addressType) {
+		this.addrLineOne = addrLineOne;
+		this.addrLineTwo = addrLineTwo;
+		this.city = city;
+		this.addressType = addressType;
+	}
+	
+	
 
 }
